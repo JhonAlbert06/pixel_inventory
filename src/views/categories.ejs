@@ -1,0 +1,62 @@
+<%- include('partials/_header.ejs') %>
+
+    <div class="container mt-5">
+        <h1>Category</h1>
+        <div class="row mt-5">
+
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>nº</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data) { %>
+                            <% data.forEach(function(category) { %>
+                                <tr>
+                                    <td>
+                                        <%= category.id %>
+                                    </td>
+                                    <td>
+                                        <%= category.name %>
+                                    </td>
+                                    <td>
+                                        <a href="/categories/edit/<%= category.id %>" class="btn btn-warning">Edit</a>
+                                        <a href="/categories/delete/<%= category.id %>"
+                                            class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                <% })} %>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Add Category
+                    </div>
+                    <div class="card-body">
+
+                        <br>
+                        <form action="/categories/add" method="post">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Name" class="form-control">
+                            </div>
+                            <br>
+
+                            <button type="submit" class="btn btn-primary">
+                                Save Category
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/_footer.ejs') %>
