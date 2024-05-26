@@ -2,11 +2,11 @@ const controller = {};
 
 controller.getCategories = (req, res) => {
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Category', (err, categories) => {
+        conn.query('SELECT * FROM Category', (err, data) => {
             if (err) {
                 res.json(err);
             }
-            res.render('categories',{data: categories});
+            res.render('categories',{data: data});
         });
     });
 };

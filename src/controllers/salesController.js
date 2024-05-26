@@ -1,13 +1,13 @@
 const controller = {};
 
-controller.getProducts = (req, res) => {
+controller.getSales = (req, res) => {
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Product', (err, data) => {
+        conn.query('SELECT * FROM Sale', (err, data) => {
             if (err) {
                 res.json(err);
             }
             console.log(data);
-            res.render('products',{data: data});
+            res.render('sales',{data: data});
         });
     });
 };
