@@ -6,7 +6,6 @@ controller.getCategories = (req, res) => {
             if (err) {
                 res.json(err);
             }
-            console.log(categories);
             res.render('categories',{data: categories});
         });
     });
@@ -22,11 +21,43 @@ controller.save = (req, res) => {
     }else{
     req.getConnection((err, conn) => {
         conn.query('INSERT INTO Category set ?', [data], (err, category) => {
-            console.log(category);
             res.redirect('/categories');
         });
     });
 }
+};
+
+controller.edit = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Category WHERE id = ?', [id], (err, category) => {
+            console.log(category);
+            res.render('categories_edit', {
+                data: category[0]
+            });
+        });
+    });
+};
+
+controller.update = (req, res) => {
+    const { id } = req.params;
+    const newCategory = req.body;
+
+    req.getConnection((err, conn) => {
+
+        conn.query('UPDATE Category set ? where id = ?', [newCategory, id], (err, rows) => {
+            res.redirect('/categories');
+        });
+    });
+};
+
+controller.delete = (req, res) => {
+    const { id } = req.params;
+    req.getConnection((err, conn) => {
+        conn.query('DELETE FROM Category WHERE id = ?', [id], (err, rows) => {
+            res.redirect('/categories');
+        });
+    });
 };
 
 module.exports = controller;
