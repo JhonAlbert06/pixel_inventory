@@ -17,6 +17,31 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <% data.forEach((product, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= product.id %>
+                                </td>
+                                <td>
+                                    <%= product.name %>
+                                </td>
+                                <td>
+                                    <%= product.description %>
+                                </td>
+                                <td>
+                                    <%= product.price %>
+                                </td>
+                                <td>
+                                    <%= product.quantity_in_stock %>
+                                </td>
+                                <td>
+                                    <%= categories.find(category=> category.id === product.category_id).name %>
+                                <td>
+                                    <a href="/products/edit/<%= product.id %>" class="btn btn-warning">Edit</a>
+                                    <a href="/products/delete/<%= product.id %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            <% }) %>
 
                     </tbody>
                 </table>
@@ -28,7 +53,7 @@
                         Add Product
                     </div>
                     <div class="card-body">
-                        <form action="/products" method="POST">
+                        <form action="/products/add" method="post">
                             <div class="mb-3">
                                 <input type="text" name="name" placeholder="Name" class="form-control">
                             </div>
@@ -39,15 +64,18 @@
                                 <input type="number" name="price" placeholder="Price" class="form-control">
                             </div>
                             <div class="mb-3">
-                                <input disabled="true" value=0 type="number" name="quantity" placeholder="Quantity"
+                                <input type="number" name="quantity_in_stock" placeholder="Quantity"
                                     class="form-control">
                             </div>
                             <div class="mb-3">
-                                <select class="form-select" id="category" name="category">
+                                <select class="form-select" id="category" name="category_id">
                                     <option selected>Category</option>
-                                    <option value="1">Smartphones</option>
-                                    <option value="2">Tablets</option>
-                                    <option value="3">Laptops</option>
+                                    <% categories.forEach(category=> { %>
+                                        <option value="<%= category.id %>">
+                                            <%= category.name %>
+                                        </option>
+
+                                        <% }) %>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Add Product</button>
