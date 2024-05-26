@@ -8,6 +8,7 @@ const myConnection = require('express-myconnection')
 const app = express();
 
 // importing routes
+const productRoutes = require('./routes/product')
 const categoryRoutes = require('./routes/category')
 const indexRoutes = require('./routes/index')
 
@@ -30,6 +31,7 @@ app.use(express.urlencoded({extended: false}));
 // routes
 app.use('/', indexRoutes);
 app.use('/categories', categoryRoutes)
+app.use('/products', productRoutes)
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
