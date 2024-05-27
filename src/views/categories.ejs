@@ -14,23 +14,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% if (data) { %>
-                            <% data.forEach(function(category) { %>
-                                <tr>
-                                    <td>
-                                        <%= category.id %>
-                                    </td>
-                                    <td>
-                                        <%= category.name %>
-                                    </td>
-                                    <td>
-                                        <a href="/categories/update/<%= category.id %>" class="btn btn-warning">Edit</a>
-                                        <a href="/categories/delete/<%= category.id %>"
-                                            class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <% })} %>
-
+                        <% data.forEach((category, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= category.name %>
+                                </td>
+                                <td>
+                                    <a href="/categories/edit/<%= category.id %>" class="btn btn-warning">Edit</a>
+                                    <a href="/categories/delete/<%= category.id %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                            <% }) %>
                     </tbody>
                 </table>
             </div>
