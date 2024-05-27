@@ -22,32 +22,48 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        Add Product
+                        Add Sale
                     </div>
                     <div class="card-body">
-                        <form action="/products" method="POST">
+                        <form action="/products/add" method="POST">
                             <div class="mb-3">
-                                <input type="text" name="name" placeholder="Name" class="form-control">
+                                <input type="date" name="date" placeholder="date" class="form-control">
                             </div>
+
                             <div class="mb-3">
-                                <input type="text" name="description" placeholder="Description" class="form-control">
+                                <select class="form-select" id="customer_id" name="customer_id">
+                                    <option selected>Customer</option>
+                                    <option value="1">Jhon</option>
+                                    <option value="2">Pablo</option>
+                                    <option value="3">Maria</option>
+                                </select>
                             </div>
+
                             <div class="mb-3">
-                                <input type="number" name="price" placeholder="Price" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <input disabled="true" value=0 type="number" name="quantity" placeholder="Quantity"
-                                    class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <select class="form-select" id="category" name="category">
-                                    <option selected>Category</option>
+                                <select class="form-select" id="customer_id" name="customer_id">
+                                    <option selected>Product</option>
                                     <option value="1">Smartphones</option>
                                     <option value="2">Tablets</option>
                                     <option value="3">Laptops</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Product</button>
+
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="number" name="quantity" placeholder="Quantity"
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" name="price" placeholder="Price" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input disabled="true" type="number" name="total" placeholder="Total"
+                                    class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Sale</button>
                         </form>
 
                     </div>
