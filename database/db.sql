@@ -16,6 +16,8 @@ CREATE TABLE Product (
     description VARCHAR(255),
     price DECIMAL(10, 2) NOT NULL,
     quantity_in_stock INT NOT NULL,
+    min_stock INT NOT NULL,
+    max_stock INT NOT NULL,
     category_id INT(6) UNSIGNED,
     FOREIGN KEY (category_id) REFERENCES Category(id)
 );

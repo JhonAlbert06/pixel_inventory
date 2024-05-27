@@ -29,6 +29,14 @@
                                     placeholder="Quantity" class="form-control">
                             </div>
                             <div class="mb-3">
+                                <input type="number" name="min_stock" value="<%= data.min_stock %>"
+                                    placeholder="Min Stock" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" name="max_stock" value="<%= data.max_stock %>"
+                                    placeholder="Max Stock" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <select class="form-select" id="category" name="category_id">
                                     <% categories.forEach(category=> { %>
                                         <option value="<%= category.id %>" <%=category.id===data.category_id

@@ -6,15 +6,10 @@ controller.getProducts = (req, res) => {
             if (err) {
                 res.json(err);
             }
-
-            console.log(data)
-
             conn.query('SELECT * FROM Category', (err, categories) => {
                 if (err) {
                     res.json(err);
                 }
-
-                console.log(categories);
             res.render('products',{data: data, categories: categories});
             });
         });
@@ -23,7 +18,6 @@ controller.getProducts = (req, res) => {
 
 controller.save = (req, res) => {
     const data = req.body;
-    console.log(data);
 
     req.getConnection((err, conn) => {
         conn.query('INSERT INTO Product set ?', [data], (err, category) => {
@@ -40,8 +34,6 @@ controller.edit = (req, res) => {
                 if (err) {
                     res.json(err);
                 }
-
-                console.log(categories);
                 res.render('products_edit', {
                     data: rows[0],
                     categories: categories
@@ -49,7 +41,7 @@ controller.edit = (req, res) => {
         });
         });
     });
-}
+};
 
 controller.update = (req, res) => {
     const { id } = req.params;
@@ -59,7 +51,7 @@ controller.update = (req, res) => {
             res.redirect('/products');
         });
     });
-}   
+};  
 
 controller.delete = (req, res) => {
     const { id } = req.params;
@@ -68,6 +60,36 @@ controller.delete = (req, res) => {
             res.redirect('/products');
         });
     });
-}
+};
+
+controller.updateStock = (req, res) => {
+    const { id } = req.params;
+    const newStock = req.body;
+
+    console.log(newStock)
+    console.log(id)
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Product WHERE id = ?', [id], (err, rows) => {
+            const stock = parseInt(rows[0].quantity_in_stock, 10) + parseInt(newStock.quantity_in_stock, 10);
+            conn.query('UPDATE Product set quantity_in_stock = ? where id = ?', [stock, id], (err, rows) => {
+                res.redirect('/products');
+            });
+        });
+    });
+};
+
+controller.editStock = (req, res) => {
+
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Product', (err, data) => {
+            if (err) {
+                res.json(err);
+            }
+
+            //console.log(data)
+            res.render('increaseStock',{data: data});
+        });
+    });
+};
 
 module.exports = controller;

@@ -1,0 +1,100 @@
+<%- include('partials/_header.ejs') %>
+
+    <div class="container mt-5 mb-5">
+        <h1>Increase Stock</h1>
+
+        <div class="row mt-5">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        Update Stock
+                    </div>
+                    <div class="card-body">
+                        <br>
+                        <form id="update-stock-form" action="/products/updateStock/" method="post">
+
+                            <div class="mb-3">
+                                <select class="form-select" id="product" name="id">
+                                    <option value="">Select Product</option>
+                                    <% data.forEach(product=> { %>
+                                        <option value="<%= product.id %>" data-name="<%= product.name %>"
+                                            data-description="<%= product.description %>"
+                                            data-price="<%= product.price %>" data-min_stock="<%= product.min_stock %>"
+                                            data-max_stock="<%= product.max_stock %>">
+                                            <%= product.name %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Name" class="form-control"
+                                    value="" disabled="true">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description">Description</label>
+                                <input type="text" id="description" name="description" placeholder="Description"
+                                    class="form-control" disabled="true">
+                            </div>
+                            <div class="mb-3">
+                                <label for="price">Price</label>
+                                <input type="number" id="price" name="price" placeholder="Price" class="form-control"
+                                    disabled="true">
+                            </div>
+                            <div class="mb-3">
+                                <label for="min_stock">Min Stock</label>
+                                <input type="number" id="min_stock" name="min_stock" placeholder="Min Stock"
+                                    class="form-control" disabled="true">
+                            </div>
+                            <div class="mb-3">
+                                <label for="max_stock">Max Stock</label>
+                                <input type="number" id="max_stock" name="max_stock" placeholder="Max Stock"
+                                    class="form-control" disabled="true">
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantity_in_stock">Quantity</label>
+                                <input type="number" name="quantity_in_stock" placeholder="Quantity"
+                                    class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Edit Stock</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/_footer.ejs') %>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const productSelect = document.getElementById('product');
+                const nameInput = document.getElementById('name');
+                const descriptionInput = document.getElementById('description');
+                const priceInput = document.getElementById('price');
+                const updateStockForm = document.getElementById('update-stock-form');
+                const min_stockInput = document.getElementById('min_stock');
+                const max_stockInput = document.getElementById('max_stock');
+
+                productSelect.addEventListener('change', function () {
+                    const selectedOption = productSelect.options[productSelect.selectedIndex];
+
+                    const id = selectedOption.value;
+                    const name = selectedOption.getAttribute('data-name');
+                    const description = selectedOption.getAttribute('data-description');
+                    const price = selectedOption.getAttribute('data-price');
+                    const min_stock = selectedOption.getAttribute('data-min_stock');
+                    const max_stock = selectedOption.getAttribute('data-max_stock');
+
+                    nameInput.value = name;
+                    descriptionInput.value = description;
+                    priceInput.value = price;
+                    min_stockInput.value = min_stock;
+                    max_stockInput.value = max_stock;
+
+                    // Update the form action to include the product ID
+                    updateStockForm.action = `/products/updateStock/${id}`;
+                });
+            });
+        </script>

@@ -37,8 +37,13 @@
                                 <td>
                                     <%= categories.find(category=> category.id === product.category_id).name %>
                                 <td>
-                                    <a href="/products/edit/<%= product.id %>" class="btn btn-warning">Edit</a>
-                                    <a href="/products/delete/<%= product.id %>" class="btn btn-danger">Delete</a>
+                                    <a href="/products/edit/<%= product.id %>" class="btn btn-warning">
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/edit.png" width="20" />
+                                    </a>
+                                    <a href="/products/delete/<%= product.id %>" class="btn btn-danger">
+                                        <img src="https://img.icons8.com/ios-glyphs/30/000000/delete-sign.png"
+                                            width="20" />
+                                    </a>
                                 </td>
                             </tr>
                             <% }) %>
@@ -68,6 +73,12 @@
                                     class="form-control">
                             </div>
                             <div class="mb-3">
+                                <input type="number" name="min_stock" placeholder="Min Stock" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" name="max_stock" placeholder="Max Stock" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <select class="form-select" id="category" name="category_id">
                                     <option selected>Category</option>
                                     <% categories.forEach(category=> { %>
@@ -78,7 +89,10 @@
                                         <% }) %>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Product</button>
+
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">Save Product</button>
+                            </div>
                         </form>
 
                     </div>
