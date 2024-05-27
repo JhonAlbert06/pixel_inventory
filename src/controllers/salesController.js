@@ -7,7 +7,26 @@ controller.getSales = (req, res) => {
                 res.json(err);
             }
             console.log(data);
-            res.render('sales',{data: data});
+            
+            conn.query('SELECT * FROM Customer', (err, customers) => {
+                if (err) {
+                    res.json(err);
+                }
+                console.log(customers);
+                
+                conn.query('SELECT * FROM Product', (err, products) => {
+                    if (err) {
+                        res.json(err);
+                    }
+                    console.log(products);
+                    
+                    res.render('sales', {
+                        data: data,
+                        customers: customers,
+                        products: products
+                    });
+                });
+            });
         });
     });
 };

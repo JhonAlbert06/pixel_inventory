@@ -15,6 +15,23 @@
                     </thead>
                     <tbody>
 
+                        <% data.forEach((sale, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <%= sale.date %>
+                                </td>
+                                <td>
+                                    <%= customers.find(customer=> customer.id === sale.customer_id).name %>
+                                </td>
+                                <td>
+                                    <%= sale.total %>
+                                </td>
+                            </tr>
+                            <% }) %>
+
                     </tbody>
                 </table>
             </div>
@@ -33,18 +50,26 @@
                             <div class="mb-3">
                                 <select class="form-select" id="customer_id" name="customer_id">
                                     <option selected>Customer</option>
-                                    <option value="1">Jhon</option>
-                                    <option value="2">Pablo</option>
-                                    <option value="3">Maria</option>
+
+                                    <% customers.forEach(customer=> { %>
+                                        <option value="<%= customer
+                                        .id %>">
+                                            <%= customer.name %>
+                                        </option>
+                                        <% }) %>
+
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <select class="form-select" id="customer_id" name="customer_id">
                                     <option selected>Product</option>
-                                    <option value="1">Smartphones</option>
-                                    <option value="2">Tablets</option>
-                                    <option value="3">Laptops</option>
+                                    <% products.forEach(product=> { %>
+                                        <option value="<%= product
+                                        .id %>">
+                                            <%= product.name %>
+                                        </option>
+                                        <% }) %>
                                 </select>
                             </div>
 
