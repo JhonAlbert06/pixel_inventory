@@ -14,6 +14,8 @@ const productRoutes = require('./routes/product')
 const categoryRoutes = require('./routes/category')
 const indexRoutes = require('./routes/index')
 
+const productController = require('./controllers/productController');
+
 // settings
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
@@ -36,7 +38,7 @@ app.use('/categories', categoryRoutes);
 app.use('/products', productRoutes);
 app.use('/customers', customerRoutes);
 app.use('/sales', salesRoutes);
-
+app.get('/increaseStock', productController.editStock)
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
